@@ -5,16 +5,16 @@ using UnityEngine;
 public class ButtonHandler : MonoBehaviour
 {
     
-    [HideInInspector]public bool EmotionIsForced;
-    [HideInInspector]public int scaredVotes;
-    [HideInInspector]public int happyVotes;
-    [HideInInspector]public int angryVotes;
+    [HideInInspector] public bool EmotionIsForced = false;
+    [HideInInspector] public int scaredVotes;
+    [HideInInspector] public int happyVotes;
+    [HideInInspector] public int angryVotes;
 
-    [SerializeField] private bool scaredMostVoted;
-    [SerializeField] private bool happyMostVoted;
-    [SerializeField] private bool angryMostVoted;
+    public  bool scaredMostVoted;
+    public bool happyMostVoted;
+    public bool angryMostVoted;
     
-    public ButtonHandler instance;
+    [HideInInspector] public static ButtonHandler instance;
     
     
     // Start is called before the first frame update

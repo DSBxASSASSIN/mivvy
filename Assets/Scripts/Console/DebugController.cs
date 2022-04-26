@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class DebugController : MonoBehaviour
 {
+
+    private GUIStyle henk = new GUIStyle(); 
     bool showConsole;
     bool showHelp;
 
@@ -15,8 +17,7 @@ public class DebugController : MonoBehaviour
     public static DebugCommand FORCE_EMOTION_SCRARED;
     public static DebugCommand FORCE_EMOTION_HAPPY;
     public static DebugCommand FORCE_EMOTION_ANGRY;
-    public static DebugCommand TURN_FORCE_EMOTION_OFF;
-    public static DebugCommand SHOW_FPS;
+    public static DebugCommand FORCE_EMOTION_OFF;
     public static DebugCommand HELP;
 
     public List<object> commandList;
@@ -33,21 +34,32 @@ public class DebugController : MonoBehaviour
     }
 
     private void Awake() {
+        henk.fontSize = 20;
+        henk.normal.textColor = Color.white;
 
         FORCE_EMOTION_SCRARED = new DebugCommand("force_emotion_scared", "makes the current emotion scared.", "force_emotion_scared", () => {
-            
+            ButtonHandler.instance.EmotionIsForced = true;
+            ButtonHandler.instance.scaredMostVoted = true;
+            ButtonHandler.instance.happyMostVoted = false;
+            ButtonHandler.instance.angryMostVoted = false;
         });
 
         FORCE_EMOTION_HAPPY = new DebugCommand("force_emotion_happy", "makes the current emotion happy.", "force_emotion_happy", () => {
-
+            ButtonHandler.instance.EmotionIsForced = true;
+            ButtonHandler.instance.scaredMostVoted = false;
+            ButtonHandler.instance.happyMostVoted = true;
+            ButtonHandler.instance.angryMostVoted = false;
         });
 
         FORCE_EMOTION_ANGRY = new DebugCommand("force_emotion_angry", "makes the current emotion angry.", "force_emotion_angry", () => {
-
+            ButtonHandler.instance.EmotionIsForced = true;
+            ButtonHandler.instance.scaredMostVoted = true;
+            ButtonHandler.instance.happyMostVoted = true;
+            ButtonHandler.instance.angryMostVoted = true;
         });
 
-        SHOW_FPS = new DebugCommand("show_fps", "shows the current fps", "show_fps", () => {
-            FPSDisplay.instance.toggleShowStats();
+        FORCE_EMOTION_OFF = new DebugCommand("force_emotion_off", "turns the forcing of emotion off.", "force_emotion_off", () => {
+            ButtonHandler.instance.EmotionIsForced = false;
         });
 
         HELP = new DebugCommand("help", "shows a list of commands", "help", () => {
@@ -60,7 +72,7 @@ public class DebugController : MonoBehaviour
             FORCE_EMOTION_SCRARED,
             FORCE_EMOTION_HAPPY,
             FORCE_EMOTION_ANGRY,
-            SHOW_FPS,
+            FORCE_EMOTION_OFF,
             HELP
         };
     }
@@ -68,6 +80,7 @@ public class DebugController : MonoBehaviour
 
     Vector2 scroll;
     private void OnGUI() {
+
 
         if(!showConsole){  showHelp = false; return; }
 
@@ -87,7 +100,7 @@ public class DebugController : MonoBehaviour
 
                 Rect labelRect = new Rect(5, 20 * i, viewport.width - 100, 20);
 
-                GUI.Label(labelRect, label);
+                GUI.Label(labelRect, label, henk);
             }
 
             GUI.EndScrollView();
@@ -97,7 +110,7 @@ public class DebugController : MonoBehaviour
 
         GUI.Box(new Rect(0, y, Screen.width, 30), "");
         GUI.backgroundColor = new Color(0, 0, 0, 0);
-        input = GUI.TextField(new Rect(10f, y + 5f, Screen.width - 20f, 20f), input);
+        input = GUI.TextField(new Rect(10f, y + 5f, Screen.width - 20f, 20f), input, henk);
     }
 
     private void HandleInPut() {
@@ -106,7 +119,6 @@ public class DebugController : MonoBehaviour
 
         for(int i=0; i < commandList.Count; i++) {
             DebugCommandbase commandbase = commandList[i] as DebugCommandbase;
-            Debug.Log("commandbase.commandid: " + commandbase.commandId);
             if (input.Contains(commandbase.commandId)) {
 
                 if(commandList[i] as DebugCommand != null) {
