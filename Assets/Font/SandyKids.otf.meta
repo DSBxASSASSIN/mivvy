@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: bc0e3008f4bb1c24d99553e4048e29ca
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Sandy Kids
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c9bc7b3edfed1fd47afcac6d0f371784, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
