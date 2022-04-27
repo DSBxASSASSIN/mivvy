@@ -100,21 +100,21 @@ public class ButtonHandler : MonoBehaviour
             videoPlayer.clip = scared_scared;
             yield return new WaitForSeconds(4f);
             StartCoroutine(BackgroundImages());
-            videoPlayer.clip = scared_idle;
+            //videoPlayer.clip = scared_idle;
         }
         else if (happyMostVoted)
         {
             videoPlayer.clip = happy_scared;
             yield return new WaitForSeconds(4f);
             StartCoroutine(BackgroundImages());
-            videoPlayer.clip = happy_idle;
+          //  videoPlayer.clip = happy_idle;
         }
         else if (angryMostVoted)
         {
             videoPlayer.clip = angry_scared;
             yield return new WaitForSeconds(4f);
             StartCoroutine(BackgroundImages());
-            videoPlayer.clip = angry_idle;
+            //videoPlayer.clip = angry_idle;
         }
     }
     private IEnumerator AngryAnimation()
@@ -125,21 +125,21 @@ public class ButtonHandler : MonoBehaviour
             videoPlayer.clip = scared_angry;
             yield return new WaitForSeconds(4f);
             StartCoroutine(BackgroundImages());
-            videoPlayer.clip = scared_idle;
+            //videoPlayer.clip = scared_idle;
         }
         else if (happyMostVoted)
         {
             videoPlayer.clip = happy_angry;
             yield return new WaitForSeconds(4f);
             StartCoroutine(BackgroundImages());
-            videoPlayer.clip = happy_idle;
+            //videoPlayer.clip = happy_idle;
         }
         else if (angryMostVoted)
         {
             videoPlayer.clip = angry_angry;
             yield return new WaitForSeconds(4f);
             StartCoroutine(BackgroundImages());
-            videoPlayer.clip = angry_idle;
+           /// videoPlayer.clip = angry_idle;
         }
     }
     private IEnumerator HappyAnimation()
@@ -150,41 +150,57 @@ public class ButtonHandler : MonoBehaviour
             videoPlayer.clip = scared_happy;
             yield return new WaitForSeconds(4f);
             StartCoroutine(BackgroundImages());
-            videoPlayer.clip = scared_idle;
+            //videoPlayer.clip = scared_idle;
         }
         else if (happyMostVoted)
         {
             videoPlayer.clip = happy_happy;
             yield return new WaitForSeconds(4f);
             StartCoroutine(BackgroundImages());
-            videoPlayer.clip = happy_idle;
+            //videoPlayer.clip = happy_idle;
         }
         else if (angryMostVoted)
         {
             videoPlayer.clip = angry_happy;
             yield return new WaitForSeconds(4f);
             StartCoroutine(BackgroundImages());
-            videoPlayer.clip = angry_idle;
+            //videoPlayer.clip = angry_idle;
         }
     }
 
     IEnumerator BackgroundImages()
     {
         backgrounds[0].SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         backgrounds[1].SetActive(true);
         backgrounds[0].SetActive(false);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         backgrounds[2].SetActive(true);
         backgrounds[1].SetActive(false);
-        yield return new WaitForSeconds(8f); 
+        yield return new WaitForSeconds(1f); 
         backgrounds[3].SetActive(true);
         backgrounds[2].SetActive(false);
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(1f);
         backgrounds[4].SetActive(true);
         backgrounds[3].SetActive(false);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         backgrounds[4].SetActive(false);
+        PlayIdle();
+    }
+    void PlayIdle()
+    {
+        if (scaredVotes > angryVotes && scaredVotes >= 25)
+        {
+            videoPlayer.clip = scared_idle;
+        }
+        else if (angryVotes > scaredVotes && angryVotes >= 25)
+        {
+            videoPlayer.clip = angry_idle;
+        }
+        else if (angryVotes < 25 && scaredVotes < 25)
+        {
+            videoPlayer.clip = happy_idle;
+        }
     }
 
     private int CheckgreatestNumber(int i, int j, int k){
