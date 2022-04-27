@@ -101,7 +101,7 @@ public class ButtonHandler : MonoBehaviour
         if (isScared && !isAngry)
         {
             videoPlayer.clip = scared_scared;
-            yield return new WaitForSeconds(7f);
+            yield return new WaitForSeconds(5f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = scared_idle;
         }
@@ -126,7 +126,7 @@ public class ButtonHandler : MonoBehaviour
         if (isScared && !isAngry)
         {
             videoPlayer.clip = scared_angry;
-            yield return new WaitForSeconds(7f);
+            yield return new WaitForSeconds(5f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = scared_idle;
         }
@@ -140,7 +140,7 @@ public class ButtonHandler : MonoBehaviour
         else if (!isScared && isAngry)
         {
             videoPlayer.clip = angry_angry;
-            yield return new WaitForSeconds(7f);
+            yield return new WaitForSeconds(6f);
             StartCoroutine(BackgroundImages());
            /// videoPlayer.clip = angry_idle;
         }
@@ -151,21 +151,21 @@ public class ButtonHandler : MonoBehaviour
         if (isScared && !isAngry)
         {
             videoPlayer.clip = scared_happy;
-            yield return new WaitForSeconds(7f);
+            yield return new WaitForSeconds(5f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = scared_idle;
         }
         else if (!isScared && !isAngry)
         {
             videoPlayer.clip = happy_happy;
-            yield return new WaitForSeconds(7f);
+            yield return new WaitForSeconds(6f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = happy_idle;
         }
         else if (!isScared && isAngry)
         {
             videoPlayer.clip = angry_happy;
-            yield return new WaitForSeconds(7f);
+            yield return new WaitForSeconds(6f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = angry_idle;
         }
