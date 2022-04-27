@@ -48,6 +48,9 @@ public class ButtonHandler : MonoBehaviour
     public TextMeshProUGUI[] textjes = new TextMeshProUGUI[3];
 
     public AudioSource[] buttonSounds;
+
+    bool isScared = false;
+    bool isAngry = false;
     // Start is called before the first frame update
     void Start(){
         buttonSounds[0].volume = 0f;
@@ -95,24 +98,24 @@ public class ButtonHandler : MonoBehaviour
     private IEnumerator ScaredAnimation()
     {
         yield return new WaitForSeconds(0.5f);
-        if (scaredMostVoted)
+        if (isScared && !isAngry)
         {
             videoPlayer.clip = scared_scared;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(7f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = scared_idle;
         }
-        else if (happyMostVoted)
+        else if (!isScared && !isAngry)
         {
             videoPlayer.clip = happy_scared;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(7f);
             StartCoroutine(BackgroundImages());
           //  videoPlayer.clip = happy_idle;
         }
-        else if (angryMostVoted)
+        else if (!isScared && isAngry)
         {
             videoPlayer.clip = angry_scared;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(7f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = angry_idle;
         }
@@ -120,24 +123,24 @@ public class ButtonHandler : MonoBehaviour
     private IEnumerator AngryAnimation()
     {
         yield return new WaitForSeconds(0.5f);
-        if (scaredMostVoted)
+        if (isScared && !isAngry)
         {
             videoPlayer.clip = scared_angry;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(7f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = scared_idle;
         }
-        else if (happyMostVoted)
+        else if (!isScared && !isAngry)
         {
             videoPlayer.clip = happy_angry;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(7f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = happy_idle;
         }
-        else if (angryMostVoted)
+        else if (!isScared && isAngry)
         {
             videoPlayer.clip = angry_angry;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(7f);
             StartCoroutine(BackgroundImages());
            /// videoPlayer.clip = angry_idle;
         }
@@ -145,24 +148,24 @@ public class ButtonHandler : MonoBehaviour
     private IEnumerator HappyAnimation()
     {
         yield return new WaitForSeconds(0.5f);
-        if (scaredMostVoted)
+        if (isScared && !isAngry)
         {
             videoPlayer.clip = scared_happy;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(7f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = scared_idle;
         }
-        else if (happyMostVoted)
+        else if (!isScared && !isAngry)
         {
             videoPlayer.clip = happy_happy;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(7f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = happy_idle;
         }
-        else if (angryMostVoted)
+        else if (!isScared && isAngry)
         {
             videoPlayer.clip = angry_happy;
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(7f);
             StartCoroutine(BackgroundImages());
             //videoPlayer.clip = angry_idle;
         }
@@ -171,34 +174,41 @@ public class ButtonHandler : MonoBehaviour
     IEnumerator BackgroundImages()
     {
         backgrounds[0].SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         backgrounds[1].SetActive(true);
         backgrounds[0].SetActive(false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(5f);
         backgrounds[2].SetActive(true);
         backgrounds[1].SetActive(false);
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(8f); 
         backgrounds[3].SetActive(true);
         backgrounds[2].SetActive(false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(8f);
         backgrounds[4].SetActive(true);
         backgrounds[3].SetActive(false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(5f);
         backgrounds[4].SetActive(false);
         PlayIdle();
     }
+
     void PlayIdle()
     {
         if (scaredVotes > angryVotes && scaredVotes >= 25)
         {
+            isScared = true;
+            isAngry = false;
             videoPlayer.clip = scared_idle;
         }
         else if (angryVotes > scaredVotes && angryVotes >= 25)
         {
+            isScared = false;
+            isAngry = true;
             videoPlayer.clip = angry_idle;
         }
         else if (angryVotes < 25 && scaredVotes < 25)
         {
+            isScared = false;
+            isAngry = false;
             videoPlayer.clip = happy_idle;
         }
     }
